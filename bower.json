@@ -1,0 +1,17 @@
+{
+  "name": "texturer",
+  "version": "0.0.1",
+  "private": true,
+  "authors": [
+    "ayan4m1 <andrew@bulletlogic.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "lib"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "3.2.x",
+    "bootswatch-scss": "ayan4m1/bootswatch-scss#3.2.0+2",
+    "fontawesome": "4.1.x"
+  }
+}

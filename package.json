@@ -1,0 +1,13 @@
+{
+  "name": "texturer",
+  "version": "0.0.1",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "gulp": "^3.8.7",
+    "gulp-coffee": "^2.1.2",
+    "gulp-sass": "^0.7.3",
+    "gulp-watch": "^0.6.9",
+    "http-server": "^0.6.1",
+    "node-phantom-simple": "^1.2.0"
+  }
+}
