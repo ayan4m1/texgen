@@ -27,7 +27,7 @@ renderPage = ->
         width: 1
       }
 
-      page.open "http://localhost:8080/example.html", (error, status) ->
+      page.open "http://localhost:8080/", (error, status) ->
         if error? or status isnt 'success'
           console.log(error, status)
           return
