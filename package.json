@@ -1,13 +1,25 @@
 {
-  "name": "texturer",
-  "version": "0.0.1",
-  "devDependencies": {
+  "name": "texgen",
+  "version": "0.0.2",
+  "description": "generate png textures from html/scss",
+  "author": "ayan4m1 <andrew@bulletlogic.com>",
+  "dependencies": {
     "coffee-script": "^1.7.1",
     "gulp": "^3.8.7",
     "gulp-coffee": "^2.1.2",
     "gulp-sass": "^0.7.3",
     "gulp-watch": "^0.6.9",
-    "http-server": "^0.6.1",
+    "http-server": "^0.6.1"
+  },
+  "devDependencies": {
     "node-phantom-simple": "^1.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bulletlogic/spenj"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "MIT"
 }

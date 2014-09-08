@@ -1,7 +1,6 @@
 {
-  "name": "texturer",
-  "version": "0.0.1",
-  "private": true,
+  "name": "texgen",
+  "version": "0.0.2",
   "authors": [
     "ayan4m1 <andrew@bulletlogic.com>"
   ],
