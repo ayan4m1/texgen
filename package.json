@@ -12,7 +12,8 @@
     "gulp-sass": "^0.7.3",
     "gulp-watch": "^0.6.9",
     "http-server": "^0.6.1",
-    "minimist": "^1.1.0"
+    "minimist": "^1.1.0",
+    "p-promise": "^0.4.8"
   },
   "devDependencies": {
     "node-phantom-simple": "^1.2.0"
