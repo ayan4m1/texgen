@@ -1,64 +1,70 @@
+fs = require 'fs'
+gm = require 'gm'
+glob = require 'glob'
 gulp = require 'gulp'
-
+path = require 'path'
 sass = require 'gulp-sass'
-watch = require 'gulp-watch'
-
 http = require 'http-server'
+watch = require 'gulp-watch'
 phantom = require 'node-phantom-simple'
 
-startServer = ->
-  http.createServer(
-    root: 'dist/'
-  ).listen 8080
+server = null
+host = 'localhost'
+port = 8080
 
-renderPage = ->
+dist = 'dist/'
+src = 'src/'
+html = "#{src}html/**/*.html"
+scss = "#{src}scss/**/*.scss"
+
+gulp.task 'update', ->
+  console.log('updating webroot')
+  [
+    gulp.src(html).pipe(gulp.dest(dist))
+    gulp.src(scss).pipe(sass()).pipe(gulp.dest("#{dist}css"))
+  ]
+
+gulp.task 'startServer', ->
+  server = http.createServer({root: dist})
+  server.listen(port)
+
+gulp.task 'render', ['startServer'], ->
+  argv = require('minimist')(process.argv)
+  files = argv.files?().split(',') ? glob.sync(html) # process all files if list is not specified
+
+  for file in files
+    file = path.basename(file)
+    console.log("Rendering /#{file}")
+    renderPage(file)
+
+  # server.close()
+
+gulp.task 'default', ['update', 'render']
+
+renderPage = (file) ->
   phantom.create (error, handle) ->
     if error?
-      console.log(error)
+      console.error(error)
       return
 
     handle.createPage (error, page) ->
       if error?
-        console.log(error)
+        console.error(error)
         return
 
-      page.viewportSize = {
-        height: 1
-        width: 1
-      }
-
-      page.open "http://localhost:8080/", (error, status) ->
+      page.open "http://#{host}:#{port}/#{file}", (error, status) ->
         if error? or status isnt 'success'
-          console.log(error, status)
+          console.error(error, status)
           return
 
-        page.render 'test.png'
+        page.renderBase64('PNG', (err, encodedImage) ->
+          gm(new Buffer(encodedImage, 'base64'))
+            .trim()
+            .write file.replace('.html', '.png'), (err) ->
+              console.error("Error writing image: #{err}") if err?
+        )
 
         page.close
         return
 
       return
-
-scssSource = gulp.src('src/main/scss/**/*.scss')
-htmlSource = gulp.src('src/main/html/**/*.html')
-
-scssCompile = (files) -> files.pipe(sass()).pipe(gulp.dest('dist/css'))
-htmlCompile = (files) -> files.pipe(gulp.dest('dist'))
-
-updateDist = (useWatch) ->
-  if useWatch
-    scssSource = scssSource.pipe(watch())
-    htmlSource = htmlSource.pipe(watch())
-
-  scssSource.pipe(sass()).pipe(gulp.dest('dist/css'))
-  htmlSource.pipe(gulp.dest('dist'))
-  return
-
-gulp.task 'default', ->
-  startServer()
-  updateDist(true)
-
-gulp.task 'compile', ->
-  updateDist(false)
-  startServer()
-  renderPage()

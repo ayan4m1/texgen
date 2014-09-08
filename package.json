@@ -5,11 +5,14 @@
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "dependencies": {
     "coffee-script": "^1.7.1",
+    "glob": "^4.0.5",
+    "gm": "^1.16.0",
     "gulp": "^3.8.7",
     "gulp-coffee": "^2.1.2",
     "gulp-sass": "^0.7.3",
     "gulp-watch": "^0.6.9",
-    "http-server": "^0.6.1"
+    "http-server": "^0.6.1",
+    "minimist": "^1.1.0"
   },
   "devDependencies": {
     "node-phantom-simple": "^1.2.0"
