@@ -1,6 +1,6 @@
 {
   "name": "texgen",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "generate png textures from html/scss",
   "author": "ayan4m1 <andrew@bulletlogic.com>",
   "dependencies": {
